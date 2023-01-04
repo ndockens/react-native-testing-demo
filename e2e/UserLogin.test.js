@@ -1,11 +1,7 @@
-describe('App', () => {
+describe('User Login', () => {
   beforeAll(async () => {
     await device.launchApp();
   });
-
-  // beforeEach(async () => {
-  //   await device.reloadReactNative();
-  // });
 
   it('should show login screen', async () => {
     await expect(element(by.id('login_screen'))).toBeVisible();
