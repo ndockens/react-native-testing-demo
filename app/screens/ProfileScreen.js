@@ -4,19 +4,35 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 
 const ProfileScreen = (props) => {
   return (
-    <View testID='profile_screen'>
-    <Text style={styles.screenHeader}>Profile</Text>
-    <Text>Welcome, {props.user.username}!</Text>
-    <Button onPress={props.onLogOut} testID='logout_button' title='Log Out' />
+    <View style={styles.container} testID='profile_screen'>
+      <Text style={styles.screenTitle}>Profile</Text>
+      <Text style={styles.welcomeMessage}>Welcome, {props.user.username}!</Text>
+      <Button
+        color={styles.logOutButton.color}
+        onPress={props.onLogOut}
+        testID='logout_button'
+        title='Log Out'
+        />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  screenHeader: {
+  container: {
+    padding: 20,
+  },
+  logOutButton: {
+    color: 'darkred',
+  },
+  screenTitle: {
     fontSize: 24,
     textAlign: 'center',
-  }
+  },
+  welcomeMessage: {
+    fontSize: 30,
+    marginTop: 40,
+    textAlign: 'center',
+  },
 });
 
 export default ProfileScreen;

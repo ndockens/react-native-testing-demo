@@ -12,10 +12,10 @@ const [username, setUsername] = useState('');
 const [password, setPassword] = useState('');
 
 return (
-  <View style={styles.loginScreen} testID='login_screen'>
-    <Text style={styles.screenHeader}>Login</Text>
+  <View style={styles.container} testID='login_screen'>
+    <Text style={styles.screenTitle}>Login</Text>
     <View style={styles.loginForm}>
-      <TextInput onChangeText={(text) => setUsername(text)} placeholder='Username' style={styles.textInput} testID='username_input' value={username} />
+      <TextInput autoCapitalize={false} onChangeText={(text) => setUsername(text)} placeholder='Username' style={styles.textInput} testID='username_input' value={username} />
       <TextInput onChangeText={(text) => setPassword(text)} placeholder='Password' secureTextEntry={true} style={styles.textInput} testID='password_input' value={password} />
       <Pressable
         onPress={() => props.onLogIn({ username, password })}
@@ -30,11 +30,11 @@ return (
 };
 
 const styles = StyleSheet.create({
+  container: {
+    padding: 20,
+  },
   loginForm: {
     marginTop: '50%',
-  },
-  loginScreen: {
-    padding: 20,
   },
   primaryButton: {
     backgroundColor: 'darkred',
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-  screenHeader: {
+  screenTitle: {
     fontSize: 24,
     textAlign: 'center',
   },
