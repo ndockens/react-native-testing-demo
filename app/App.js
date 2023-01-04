@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native';
 
-import LoginScreen from './screens/LoginScreen';
-import ProfileScreen from './screens/ProfileScreen';
+import LoginScreen from './screens/login/LoginScreen';
+import ProfileScreen from './screens/profile/ProfileScreen';
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
