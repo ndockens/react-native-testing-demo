@@ -12,21 +12,17 @@ import {
 const LoginScreen = (props) => {
   return (
     <View style={styles.loginScreen} testID='login_screen'>
-      <Text>Login</Text>
-      <TextInput style={styles.textInput} placeholder='Username' />
-      <TextInput style={styles.textInput} placeholder='Password' />
-      {/* <Button
-        testID='login_button'
-        title='Log In'
-        color={styles.primaryButton.color}
-        onPress={() => props.onLogIn({ username: 'joe' })}
-        /> */}
-      <Pressable
-        onPress={() => props.onLogIn({ username: 'joe' })}
-        style={styles.primaryButton}
-        testID='login_button'>
-        <Text style={styles.primaryButtonText}>Log In</Text>
-      </Pressable>
+      <Text style={styles.screenHeader}>Login</Text>
+      <View style={styles.loginForm}>
+        <TextInput placeholder='Username' style={styles.textInput} />
+        <TextInput placeholder='Password' style={styles.textInput} />
+        <Pressable
+          onPress={() => props.onLogIn({ username: 'joe' })}
+          style={styles.primaryButton}
+          testID='login_button'>
+          <Text style={styles.primaryButtonText}>Log In</Text>
+        </Pressable>
+      </View>
     </View>
   );
 };
@@ -34,8 +30,8 @@ const LoginScreen = (props) => {
 const ProfileScreen = (props) => {
   return (
     <View testID='profile_screen'>
-      <Text>Profile</Text>
-      <Button testID='logout_button' title='Log Out' onPress={props.onLogOut} />
+      <Text style={styles.screenHeader}>Profile</Text>
+      <Button onPress={props.onLogOut} testID='logout_button' title='Log Out' />
     </View>
   );
 };
@@ -47,13 +43,16 @@ const App = () => {
   return (
     <SafeAreaView>
       {userIsLoggedIn()
-        ? <ProfileScreen user={currentUser} onLogOut={() => setCurrentUser(null)} />
+        ? <ProfileScreen onLogOut={() => setCurrentUser(null)} user={currentUser} />
         : <LoginScreen onLogIn={setCurrentUser} />}
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  loginForm: {
+    marginTop: '50%',
+  },
   loginScreen: {
     padding: 20,
   },
@@ -69,7 +68,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
-    textAlignVertical: 'center',
+  },
+  screenHeader: {
+    fontSize: 24,
+    textAlign: 'center',
   },
   textInput: {
     height: 50,
