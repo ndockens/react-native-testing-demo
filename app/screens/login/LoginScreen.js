@@ -28,7 +28,7 @@ const LoginScreen = (props) => {
           value={password}
           />
         <Pressable
-          onPress={() => props.onLogIn({ username, password })}
+          onPress={() => props.onLogIn({ username })}
           style={styles.primaryButton}
           testID='login_button'
           >

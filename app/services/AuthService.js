@@ -7,5 +7,10 @@ const users = [
 ];
 
 export const authenticate = (username, password) => {
-  return users.find(u => u.username === username && u.password == password);
+  const user = users.find(u => u.username === username && u.password == password);
+
+  if (user !== undefined)
+    return { username: user.username, displayName: user.displayName };
+  
+  return undefined;
 };
