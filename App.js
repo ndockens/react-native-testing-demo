@@ -19,6 +19,7 @@ const ProfileScreen = (props) => {
   return (
     <View testID='profile_screen'>
       <Text>Profile</Text>
+      <Button testID='logout_button' title='Log Out' onPress={props.onLogOut} />
     </View>
   );
 };
@@ -30,7 +31,7 @@ const App = () => {
   return (
     <SafeAreaView>
       {userIsLoggedIn()
-        ? <ProfileScreen user={currentUser} />
+        ? <ProfileScreen user={currentUser} onLogOut={() => setCurrentUser(null)} />
         : <LoginScreen onLogIn={setCurrentUser} />}
     </SafeAreaView>
   );
