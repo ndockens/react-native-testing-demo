@@ -9,15 +9,26 @@ import {
   View,
 } from 'react-native';
 
+const users = [
+  {
+    username: 'jdoe',
+    password: '1234',
+    displayName: 'John Doe',
+  }
+];
+
 const LoginScreen = (props) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
   return (
     <View style={styles.loginScreen} testID='login_screen'>
       <Text style={styles.screenHeader}>Login</Text>
       <View style={styles.loginForm}>
-        <TextInput placeholder='Username' style={styles.textInput} />
-        <TextInput placeholder='Password' style={styles.textInput} />
+        <TextInput onChangeText={(text) => setUsername(text)} placeholder='Username' style={styles.textInput} testID='username_input' value={username} />
+        <TextInput onChangeText={(text) => setPassword(text)} placeholder='Password' secureTextEntry={true} style={styles.textInput} testID='password_input' value={password} />
         <Pressable
-          onPress={() => props.onLogIn({ username: 'joe' })}
+          onPress={() => props.onLogIn({ username, password })}
           style={styles.primaryButton}
           testID='login_button'>
           <Text style={styles.primaryButtonText}>Log In</Text>
@@ -31,6 +42,7 @@ const ProfileScreen = (props) => {
   return (
     <View testID='profile_screen'>
       <Text style={styles.screenHeader}>Profile</Text>
+      <Text>Welcome, {props.user.username}!</Text>
       <Button onPress={props.onLogOut} testID='logout_button' title='Log Out' />
     </View>
   );
@@ -39,6 +51,12 @@ const ProfileScreen = (props) => {
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
   const userIsLoggedIn = () => currentUser !== undefined && currentUser !== null;
+  const logIn = (username, password) => {
+    const user = users.find(u => u.username === username && u.password == password);
+    if (user !== undefined && user !== null) {
+      setCurrentUser(user);
+    }
+  };
 
   return (
     <SafeAreaView>
