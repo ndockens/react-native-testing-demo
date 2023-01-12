@@ -1,9 +1,11 @@
 import { remote } from 'webdriverio';
 
 const capabilities = {
-  platformName: 'iOS',
+  'platformName': 'iOS',
+  'appium:platformVersion': '15.0',
   'appium:automationName': 'XCUITest',
   'appium:deviceName': 'iPhone 13',
+  'appium:app': 'org.reactjs.native.example.ReactNativeTestingDemo',
 };
 
 const wdOpts = {
@@ -20,15 +22,16 @@ describe('First Appium Test Suite', () => {
         driver = await remote(wdOpts);
     });
   
-    // it('should show login screen', async () => {
-    //     try {
-    //         const batteryItem = await driver.$('//*[@text="Battery"]');
-    //         await batteryItem.click();
-    //     } finally {
-    //         await driver.pause(1000);
-    //         await driver.deleteSession();
-    //     }
-    //   await expect(element(by.id('login_screen'))).toBeVisible();
-    // });
+    it('should do something', async () => {
+        try {
+            const loginButton = await driver.$('~login_button');
+            await loginButton.click();
+            const profileScreen = await driver.$('~profile_screen');
+            await expect(profileScreen).toBeVisible();
+        } finally {
+            await driver.pause(1000);
+            await driver.deleteSession();
+        }
+    });
   });
   

@@ -7,6 +7,7 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
+    "e2e-ios": "react-native run-ios && appium && jest e2e/appium/First.test.js",
     "lint": "eslint ."
   },
   "dependencies": {
