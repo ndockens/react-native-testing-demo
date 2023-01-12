@@ -8,7 +8,7 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-    "wdio": "react-native run-ios && wdio run ./wdio.conf.js"
+    "test:e2e": "wdio run ./wdio.conf.js"
   },
   "dependencies": {
     "react": "18.1.0",

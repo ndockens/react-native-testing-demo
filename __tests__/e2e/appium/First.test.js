@@ -36,8 +36,11 @@
 //   });
 
 describe('Login Process', () => {
-  it('should show the profile screen when login button is clicked', async () => {
+  it('should show the profile screen when user logs in with valid credentials', async () => {
+      await $("~username_input").setValue("jdoe");
+      await $("~password_input").setValue("1234");
       await $('~login_button').click();
+
       await expect($('~profile_screen')).toBeExisting();
   });
 });
