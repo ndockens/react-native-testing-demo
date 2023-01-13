@@ -49,36 +49,28 @@ exports.config = {
     // from the same test should run tests.
     //
     maxInstances: 10,
-    //
-    // If you have trouble getting all important capabilities together, check out the
-    // Sauce Labs platform configurator - a great tool to configure your capabilities:
-    // https://saucelabs.com/platform/platform-configurator
-    //
-    capabilities: [{
-    
-        // maxInstances can get overwritten per capability. So if you have an in-house Selenium
-        // grid with only 5 firefox instances available you can make sure that not more than
-        // 5 instances get started at a time.
-        maxInstances: 5,
-        //
-        // browserName: 'chrome',
-        // acceptInsecureCerts: true,
-        platformName: 'iOS',
-        'appium:platformVersion': '15.0',
-        'appium:automationName': 'XCUITest',
-        'appium:deviceName': 'iPhone 13',
-        // 'appium:app': 'ios/build/Build/Products/Debug-iphonesimulator/ReactNativeTestingDemo.app',
-        'appium:app': join(
-            process.cwd(),
-            // './apps/iOS-Simulator-NativeDemoApp-0.4.0.app.zip'
-            './ios/build/Build/Products/Debug-iphonesimulator/ReactNativeTestingDemo.app'
-            // 'org.reactjs.native.example.ReactNativeTestingDemo'
-        ),
-        // If outputDir is provided WebdriverIO can capture driver session logs
-        // it is possible to configure which logTypes to include/exclude.
-        // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
-        // excludeDriverLogs: ['bugreport', 'server'],
-    }],
+    capabilities: {
+        iosDevice: {
+            capabilities: {
+                platformName: 'iOS',
+                'appium:platformVersion': '15.0',
+                'appium:automationName': 'XCUITest',
+                'appium:deviceName': 'iPhone 13',
+                // 'appium:app': 'ios/build/Build/Products/Debug-iphonesimulator/ReactNativeTestingDemo.app',
+                'appium:app': join(
+                    process.cwd(),
+                    // './apps/iOS-Simulator-NativeDemoApp-0.4.0.app.zip'
+                    './ios/build/Build/Products/Debug-iphonesimulator/ReactNativeTestingDemo.app'
+                    // 'org.reactjs.native.example.ReactNativeTestingDemo'
+                ),
+            }
+        },
+        chromeBrowser: {
+            capabilities: {
+                browserName: 'chrome'
+            }
+        }
+    },
     //
     // ===================
     // Test Configurations
@@ -120,13 +112,20 @@ exports.config = {
     connectionRetryTimeout: 240000,
     //
     // Default request retries count
-    connectionRetryCount: 3,
+    connectionRetryCount: 0,
     //
     // Test runner services
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['appium'],
+    services: [
+        'appium',
+        ['chromedriver', {
+            logFileName: 'wdio-chromedriver.log', // default
+            outputDir: 'driver-logs', // overwrites the config.outputDir
+            args: ['--silent']
+        }]
+    ],
     
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
