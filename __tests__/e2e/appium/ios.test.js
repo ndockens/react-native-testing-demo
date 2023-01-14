@@ -35,16 +35,35 @@
 //     });
 //   });
 
-describe('Multi-device Testing', () => {
+xdescribe('Multi-device Testing', () => {
   it('should work', async () => {
       await chromeBrowser.url('https://www.google.com');
       await chromeBrowser.$('aria/Search').setValue('appium');
       await chromeBrowser.$('aria/Google Search').click();
       await expect(chromeBrowser.$('#search')).toHaveChildren();
 
+      await iosDevice.$('~username_input').setValue('jdoe');
+      await iosDevice.$('~password_input').setValue('1234');
+      await iosDevice.$('~login_button').click();
+      await expect(iosDevice.$('~profile_screen')).toBeExisting();
+  });
+});
+
+describe('Todo Screen', () => {
+  beforeAll(async () => {
+      // Log in to app
       await iosDevice.$("~username_input").setValue("jdoe");
       await iosDevice.$("~password_input").setValue("1234");
       await iosDevice.$('~login_button').click();
-      await expect(iosDevice.$('~profile_screen')).toBeExisting();
+  });
+
+  it('should display list of todo items', async () => {
+      await expect(iosDevice.$('~todo_list')).toHaveChildren();
+  });
+
+  it('should add todo item when button is clicked', async () => {
+      const initialItemCount = await iosDevice.$$('~todo-item').length;
+      await iosDevice.$('~new_todo_item_button').click();
+      await expect(iosDevice.$$('~todo-item')).toBeElementsArrayOfSize(initialItemCount + 1);
   });
 });

@@ -3,6 +3,7 @@ import { SafeAreaView } from 'react-native';
 
 import LoginScreen from './screens/login/LoginScreen';
 import ProfileScreen from './screens/profile/ProfileScreen';
+import TodoScreen from './screens/todo/Todo';
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -11,7 +12,8 @@ const App = () => {
   return (
     <SafeAreaView>
       {userIsLoggedIn()
-        ? <ProfileScreen onLogOut={() => setCurrentUser(null)} user={currentUser} />
+        // ? <ProfileScreen onLogOut={() => setCurrentUser(null)} user={currentUser} />
+        ? <TodoScreen />
         : <LoginScreen onLogIn={setCurrentUser} />}
     </SafeAreaView>
   );

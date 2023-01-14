@@ -4,8 +4,19 @@ export const styles = StyleSheet.create({
   container: {
     paddingTop: 20,
   },
-  logOutButton: {
-    color: 'darkred',
+  newTodoItemButton: {
+    backgroundColor: 'darkred',
+      borderRadius: 100,
+      height: 50,
+      justifyContent: 'center',
+      marginLeft: 170,
+      marginTop: 20,
+      width: 50,
+  },
+  newTodoItemButtonText: {
+    color: 'white',
+    fontSize: 28,
+    textAlign: 'center',
   },
   screenTitle: {
     fontSize: 24,
