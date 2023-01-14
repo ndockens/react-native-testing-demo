@@ -10,16 +10,16 @@ const TodoScreen = (props) => {
   return (
     <View style={styles.container} testID='todo_screen'>
       <Text style={styles.screenTitle}>To Do</Text>
-      <ScrollView testID='todo_list'>
+      <ScrollView testID='todo_list' style={styles.todoList}>
         {todoItems.map(item => <Text key={item.id} style={styles.todoItem} testID='todo-item'>{item.title}</Text>)}
       </ScrollView>
-        <Pressable
-          onPress={() => addTodoItem({ id: todoItems.length + 1, title: 'New item' }, setTodoItems)}
-          style={styles.newTodoItemButton}
-          testID='new_todo_item_button'
-          >
-          <Text style={styles.newTodoItemButtonText}>+</Text>
-        </Pressable>
+      <Pressable
+        onPress={() => addTodoItem({ id: todoItems.length + 1, title: 'New item' }, setTodoItems)}
+        style={styles.newTodoItemButton}
+        testID='new_todo_item_button'
+        >
+        <Text style={styles.newTodoItemButtonText}>+</Text>
+      </Pressable>
     </View>
   );
 };

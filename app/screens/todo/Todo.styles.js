@@ -25,4 +25,7 @@ export const styles = StyleSheet.create({
   todoItem: {
     padding: 10,
   },
+  todoList: {
+    maxHeight: '85%'
+  },
 });
